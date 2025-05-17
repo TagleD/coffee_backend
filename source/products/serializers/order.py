@@ -29,6 +29,7 @@ class OrderSerializer(serializers.ModelSerializer):
         # начисление beans
         beans = int(total_price * Decimal("0.1"))
         user.beans += beans
+        user.beans_total += beans
         user.save()
 
         order.beans_earned = beans

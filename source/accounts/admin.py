@@ -1,5 +1,5 @@
 from django.contrib import admin
-from accounts.models import User
+from accounts.models import User, Level
 
 
 # Register your models here.
@@ -22,3 +22,18 @@ class UserAdmin(admin.ModelAdmin):
         'is_superuser',
     )
     ordering = ('-id',)
+
+
+@admin.register(Level)
+class LevelAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'number',
+        'beans_required',
+    )
+    list_display_links = (
+        'id',
+        'number',
+        'beans_required',
+    )
+    ordering = ('id',)
