@@ -11,7 +11,9 @@ class CreateOrderView(APIView):
 
     def post(self, request):
         serializer = OrderSerializer(data=request.data, context={"request": request})
-        serializer.is_valid(raise_exception=True)
+        if not serializer.is_valid():
+            print(serializer.errors)  # 🧠 Добавь это
+            return Response(serializer.errors, status=400)
         order = serializer.save()
         return Response({
             "message": "Заказ успешно оформлен",
